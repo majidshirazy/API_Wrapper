@@ -21,10 +21,24 @@ high traffic loads and full in-memory execution.
 ************
 ** API ESB Gateway (Wrapper)**
 	- Config.php
+		* Stores:
+			- load balancer backed API server selection strategy
+			- timeout and health check intervals
+			- redis connection info and keys info
+			- health check endpint used on backend API
 	- MessagesProcessingRules.php
+		* some rules are processed before sending requests to backend API server
+		* some rules are processed after sending request to backend and can manipulate the messages comming from them.
 	- MainWorker.php
+		* all requests must direct to this file
+		* if there isn't any alive backend API all messages will be written and stored in redis key.
 	- QueueSenderWorker.php
+		* this is a seperated app that checks redis to get list of available backend API servers
+		* after that will be process stored messages through backend API servers by using of load balancing startegy in config file
+		* must be run as a daemon, systemd or cronjob intervally
 	- HealthCheckWorker.php
+		* this app checks avaailablity of backend API servers by using the endpoint defined on Config.php file.
+		* after that saved the status of each vendor to redis.
 
 All project files has been written in PHP
 
