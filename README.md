@@ -67,6 +67,7 @@ It can be used by virtual host or Alias in current cirtual hosts.
 mod_rewrite module must be enabled 
 	```
 	sudo a2enmod rewrite
+	
 	sudo systemctl restart apache2
 	```
 
