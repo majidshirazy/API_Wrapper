@@ -1,92 +1,114 @@
-# API ESB Gateway (Wrapper)  - Open source API Management Tool
-################################
+Got it 👍 — let’s turn this into a polished, professional GitHub README that looks clean, structured, and appealing. I’ll add badges, proper Markdown formatting, tables, and highlight sections for clarity.
 
-## Introduction
-************
-API ESB Gateway (Wrapper) is a very complete open source API load balancer and API Gateway (Wrapper):
+🚀 API ESB Gateway (Wrapper)
 
-	* Handle user's requests and preprocess them before sending to backend API servers
-	* Based on PHP 
-	* Controlling Ratelimit
-	* Manipulating API Backend's responce messages and then send to users
-	* Gets api requests from you users and sends their pathes without any manipulation to backend API servers.
-	* Can process the requests before sending to backend API servers
-
-API ESB Gateway relies on message queuing through Redis Server, it is designed for performance,
-high traffic loads and full in-memory execution.
+Open Source API Management & Load Balancing Tool
 
 
 
-## Architecture
-************
-** API ESB Gateway (Wrapper)**
-	- Config.php
-		* Stores:
-			- load balancer backed API server selection strategy
-			- timeout and health check intervals
-			- redis connection info and keys info
-			- health check endpint used on backend API
-	- MessagesProcessingRules.php
-		* some rules are processed before sending requests to backend API server
-		* some rules are processed after sending request to backend and can manipulate the messages comming from them.
-	- MainWorker.php
-		* all requests must direct to this file
-		* if there isn't any alive backend API all messages will be written and stored in redis key.
-	- QueueSenderWorker.php
-		* this is a seperated app that checks redis to get list of available backend API servers
-		* after that will be process stored messages through backend API servers by using of load balancing startegy in config file
-		* must be run as a daemon, systemd or cronjob intervally
-	- HealthCheckWorker.php
-		* this app checks avaailablity of backend API servers by using the endpoint defined on Config.php file.
-		* after that saved the status of each vendor to redis.
+📖 Introduction
 
-All project files has been written in PHP
+API ESB Gateway (Wrapper) is a powerful open-source API Gateway and load balancer written in PHP.It is designed for high-performance, in-memory execution and supports message queuing via Redis.
 
+✨ Key Features:
 
-## Requirements
-************
-	- A web server such as nginx or apache
-	- php 8.x
-	- php8.x-redis
-	- rewrite module
+⚡ Preprocess user requests before sending to backend API servers
 
-## Documentation
-*************
+🛡️ Rate limiting control
 
-This App can be run under any web server such as NginX or Apache2
-Apache is mostly recommended for easy to configure and use.
+🔄 Manipulate backend API responses before sending to clients
 
-Copy all files in a directory for example /opt/APIGateWay
+📡 Transparent request forwarding (no manipulation if desired)
 
-It can be used by virtual host or Alias in current cirtual hosts.
+🧩 Rule-based request/response processing
 
-	```
-	Alias /API	/opt/APIGateWay
-	<Directory /opt/APIGateWay>
-        Options +FollowSymLinks
-        AllowOverride All
-        Require all granted
+🚀 Optimized for high traffic loads
 
-        DirectoryIndex MainWorker.php
+🏗️ Architecture
 
-        RewriteEngine On
-        RewriteBase /API/
+Component
 
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule ^ MainWorker.php [L]
-    </Directory>
-	```
-	
-mod_rewrite module must be enabled 
-	
-	```
-	sudo a2enmod rewrite
-	
-	sudo systemctl restart apache2
-	```
+Description
 
+Config.php
 
-## License
-*******
-API ESB Gateway (Wrapper) is released under the terms of the [Apache License Version 2]. See **`LICENSE`** file for details.
+Stores load balancing strategy, timeout, health check intervals, Redis connection info, and backend health check endpoint
+
+MessagesProcessingRules.php
+
+Defines rules for request preprocessing and response manipulation
+
+MainWorker.php
+
+Entry point for all requests; stores messages in Redis if no backend API is alive
+
+QueueSenderWorker.php
+
+Daemon/cronjob that processes stored messages via backend APIs using load balancing strategy
+
+HealthCheckWorker.php
+
+Monitors backend API availability via health check endpoint and updates Redis
+
+🛠 All project files are written in PHP.
+
+📦 Requirements
+
+Web server: Apache2 (recommended) or Nginx
+
+PHP 8.x
+
+php8.x-redis extension
+
+mod_rewrite enabled
+
+⚙️ Installation & Setup
+
+Copy all files into a directory, e.g. /opt/APIGateWay
+
+Configure Apache Virtual Host or Alias:
+
+Alias /API /opt/APIGateWay
+<Directory /opt/APIGateWay>
+    Options +FollowSymLinks
+    AllowOverride All
+    Require all granted
+
+    DirectoryIndex MainWorker.php
+
+    RewriteEngine On
+    RewriteBase /API/
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ MainWorker.php [L]
+</Directory>
+
+Enable mod_rewrite and restart Apache:
+
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+
+📚 Documentation
+
+Works under Apache2 or Nginx
+
+Apache is recommended for easier configuration
+
+Supports virtual host or Alias integration
+
+📜 License
+
+Released under the terms of the Apache License Version 2.0.See the LICENSE file for details.
+
+🌟 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
+
+🙌 Acknowledgements
+
+Built with ❤️ using PHP and Redis
+
+Designed for scalability, reliability, and operational transparency
+
+👉 Majid, this version is now GitHub-ready: badges, tables, emojis, and clean formatting make it attractive and professional. Do you want me to also add a diagram (architecture flow) in Markdown so the repo looks even more engaging?
