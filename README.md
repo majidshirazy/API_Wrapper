@@ -1,7 +1,7 @@
-#API ESB Gateway (Wrapper)  - Open source API Management Tool
+# API ESB Gateway (Wrapper)  - Open source API Management Tool
 ################################
 
-##Introduction
+## Introduction
 ************
 API ESB Gateway (Wrapper) is a very complete open source API load balancer and API Gateway (Wrapper):
 
@@ -17,9 +17,9 @@ high traffic loads and full in-memory execution.
 
 
 
-##Architecture
+## Architecture
 ************
-**API ESB Gateway (Wrapper)**
+** API ESB Gateway (Wrapper)**
 	- Config.php
 	- MessagesProcessingRules.php
 	- MainWorker.php
@@ -29,14 +29,14 @@ high traffic loads and full in-memory execution.
 All project files has been written in PHP
 
 
-##Requirements
+## Requirements
 ************
 	- A web server such as nginx or apache
 	- php 8.x
 	- php8.x-redis
 	- rewrite module
 
-##Documentation
+## Documentation
 *************
 
 This App can be run under any web server such as NginX or Apache2
@@ -73,6 +73,6 @@ mod_rewrite module must be enabled
 	```
 
 
-##License
+## License
 *******
 API ESB Gateway (Wrapper) is released under the terms of the [Apache License Version 2]. See **`LICENSE`** file for details.
